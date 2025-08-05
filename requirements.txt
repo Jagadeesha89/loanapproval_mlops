@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+pymongo
+certifi
+pyaml
+mlflow
+fastapi[standard]
+uvicorn
+dagshub
+python-dotenv
+#-e .

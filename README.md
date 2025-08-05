@@ -1,1 +1,1 @@
-# loanapproval_mlops
+# This is loanapporval project with end to end ETL and ML ops
