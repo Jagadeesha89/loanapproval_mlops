@@ -1,0 +1,18 @@
+from src.components.data_ingestion import DataIngestion
+from src.exception.exception import LoanapprovalException
+from src.logging.logger import logging
+from src.entity.config_entity import TrainingPipelineConfig
+from src.entity.config_entity import DataIngestionConfig
+import sys
+
+if __name__ == "__main__":
+    try:
+        trainig_pipeline_config= TrainingPipelineConfig()
+        data_ingestion_config = DataIngestionConfig(training_pipeline_congig=trainig_pipeline_config)
+        data_ingestion=DataIngestion(data_ingestion_config=data_ingestion_config)
+        logging.info("Initiating Data Ingestion")
+        data_ingestion_artifact =data_ingestion.initiate_data_ingestion()
+        logging.info(f"Data Ingestion Completed")
+        print(data_ingestion_artifact)
+    except Exception as e:
+        raise LoanapprovalException(e,sys)
