@@ -1,8 +1,9 @@
 from src.components.data_ingestion import DataIngestion
+from src.components.data_validation import DataValidation
 from src.exception.exception import LoanapprovalException
 from src.logging.logger import logging
 from src.entity.config_entity import TrainingPipelineConfig
-from src.entity.config_entity import DataIngestionConfig
+from src.entity.config_entity import DataIngestionConfig,DataValidationConfig
 import sys
 
 if __name__ == "__main__":
@@ -14,5 +15,11 @@ if __name__ == "__main__":
         data_ingestion_artifact =data_ingestion.initiate_data_ingestion()
         logging.info(f"Data Ingestion Completed")
         print(data_ingestion_artifact)
+        data_validation_config = DataValidationConfig(training_pipeline_congig=trainig_pipeline_config)
+        data_validation = DataValidation(data_validation_config=data_validation_config,data_ingestion_artifact=data_ingestion_artifact)
+        logging.info(f"Initiating Data Validation")
+        data_validation_artifact =data_validation.initiate_data_validation()
+        logging.info(f"Data Validation Completed")
+        print(data_validation_artifact)
     except Exception as e:
         raise LoanapprovalException(e,sys)
