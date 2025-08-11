@@ -14,5 +14,32 @@ columns:
   - person_income: float64
   - previous_loan_defaults_on_file: object
 
+label_encod:
+  - loan_intent
+  - person_home_ownership
+
+one_hot_encode:
+  - previous_loan_defaults_on_file
+  - person_gender
+
+ord_encod:
+  - person_education
+
+stand_scaler:
+  - cb_person_cred_hist_length
+  - credit_score
+  - loan_amnt
+  - loan_int_rate
+  - loan_percent_income
+  - person_age
+  - person_emp_exp
+  - person_income
+
+
+
+
+
+
+
 
 

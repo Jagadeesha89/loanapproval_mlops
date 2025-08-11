@@ -3,6 +3,7 @@ from src.exception.exception import LoanapprovalException
 from src.logging.logger  import logging
 import os,sys
 import pandas as pd
+import numpy as np
 import pickle
 from sklearn.metrics import f1_score,accuracy_score,recall_score,precision_score
 from sklearn.model_selection import GridSearchCV
@@ -24,3 +25,24 @@ def write_yaml_file(file_path:str,content:object,replace:bool=False)->None:
             yaml.dump(content,file)
     except Exception as e:
         raise LoanapprovalException(e,sys)
+    
+def save_numpy_array(file_path:str,array:np.array):
+    try:
+        dir_path=os.path.dirname(file_path)
+        os.makedirs(dir_path,exist_ok=True)
+        with open(file_path,"wb") as file_obj:
+            np.save(file_obj,array)
+    except Exception as e:
+        raise LoanapprovalException(e,sys)
+    
+def save_object(file_path:str,obj:object)->None:
+    try:
+        logging.info(f"enter the save object method in utils under main utlis")
+        dir_path=os.path.dirname(file_path)
+        os.makedirs(dir_path,exist_ok=True)
+        with open(file_path,"wb") as file_obj:
+            pickle.dump(obj,file_obj)
+        logging.info(f"Exited save object method")
+    except Exception as e:
+        raise LoanapprovalException(e,sys)
+        

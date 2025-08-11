@@ -41,3 +41,12 @@ DATA_VALIDATION_VALID_DIR:str ="validated"
 DATA_VALIDATION_INVALID_DIR:str = "invalid"
 DATA_VALIDATION_DRIFT_REPORT_DIR:str = "data_drift_repot"
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME:str = "drift_report.yaml"
+
+"""
+Data Tranfromation related constant start with data_transfromation VAR name
+
+"""
+DATA_TRANSFORMATION_DIR_NAME:str = "data_transformation"
+DATA_TRANSFORMATION_TRANSFORMED_DIR:str = "transformed"
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT: str = "transformed_object"
+PREPROCESSING_OBJECT_FILE_NAME: str = "preprocesser.pkl"
