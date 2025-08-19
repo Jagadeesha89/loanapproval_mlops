@@ -31,6 +31,7 @@ class DataIngestion:
             df= pd.DataFrame(list(collection.find()))
             if "_id" in df.columns.to_list():
                 df.drop(columns=["_id"],inplace=True) 
+                df=df[:10000]
             logging.info(f"Successfuly Exported Collection as DataFrame with rows {df.shape[0]} and columns {df.shape[1]}")
             return df
         except Exception as e:

@@ -45,4 +45,48 @@ def save_object(file_path:str,obj:object)->None:
         logging.info(f"Exited save object method")
     except Exception as e:
         raise LoanapprovalException(e,sys)
-        
+    
+def load_object(file_path:str,)-> object:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"this file: {file_path} does not exist")
+        with open (file_path,"rb") as file_obj:
+            return pickle.load(file_obj)
+    except Exception as e:
+        raise LoanapprovalException(e,sys)
+
+def load_numpy_array_data(file_path:str)->np.array:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f"File not found")
+        with open(file_path,"rb") as file_arr:
+            return np.load(file_arr)
+    except Exception as e:
+        raise LoanapprovalException(e,sys)
+
+def evaluate_models(x_train,y_train,x_test,y_test,models,param):
+    try:
+        report={}
+
+        for i in range(len(list(models))):
+            model=list(models.values())[i]
+            parm=param[list(models.keys())[i]]
+
+            gs=GridSearchCV(model,parm,cv=3)
+            gs.fit(x_train,y_train)
+
+            model.set_params(**gs.best_params_)
+            model.fit(x_train,y_train)
+
+            y_train_predict = model.predict(x_train)
+            y_test_predict = model.predict(x_test)
+
+            train_model_score = accuracy_score(y_train,y_train_predict)
+            test_model_score = accuracy_score(y_test,y_test_predict)
+
+            report[list(models.keys())[i]] = train_model_score
+
+        return report
+    except Exception as e:
+        raise LoanapprovalException(e,sys)
+    
